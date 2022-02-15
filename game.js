@@ -119,40 +119,57 @@ function game() {
         const rockBtn = document.querySelector('#rock');
         const paperBtn = document.querySelector('#paper');
         const scissorsBtn = document.querySelector('#scissors');
-    
+
+        const resetBtn = document.querySelector('#reset');
+
         // listen for click events to choose either rock paper or scissors
         // then play a single round with that selection
         rockBtn.addEventListener('click', function () {
-            result.textContent = playRound('rock');
-            checkResultStatus();
-            runningTotal.textContent = `Current score:\n 
-                P ${playerScore} / CPU ${cpuScore}`;
-            roundCount++; // increment # of rounds played
-            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
-            console.log(roundCount);
-            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            if(roundCount < 5){
+                result.textContent = playRound('rock');
+                checkResultStatus();
+                runningTotal.textContent = `Current score:\n 
+                    P ${playerScore} / CPU ${cpuScore}`;
+                roundCount++; // increment # of rounds played
+                roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+                console.log(roundCount);
+                if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            }
         });
     
         paperBtn.addEventListener('click', function() {
-            result.textContent = playRound('paper');
-            checkResultStatus();
-            runningTotal.textContent = `Current score:\n 
-                P ${playerScore} / CPU ${cpuScore}`;
-            roundCount++;
-            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
-            console.log(roundCount);
-            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            if(roundCount < 5){
+                result.textContent = playRound('paper');
+                checkResultStatus();
+                runningTotal.textContent = `Current score:\n 
+                    P ${playerScore} / CPU ${cpuScore}`;
+                roundCount++;
+                roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+                console.log(roundCount);
+                if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            }
         });
         
         scissorsBtn.addEventListener('click', function() {
-            result.textContent = playRound('scissors');
-            checkResultStatus();
+            if(roundCount < 5){
+                result.textContent = playRound('scissors');
+                checkResultStatus();
+                runningTotal.textContent = `Current score:\n 
+                    P ${playerScore} / CPU ${cpuScore}`;
+                roundCount++;
+                roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+                console.log(roundCount);
+                if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            }
+        });
+
+        resetBtn.addEventListener('click', function(){
+            roundCount = 0;
+            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+            playerScore = 0, cpuScore = 0;
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
-            roundCount++;
-            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
-            console.log(roundCount);
-            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
+            winnerDisplay.textContent = "";
         });
 }
 
