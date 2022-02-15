@@ -12,8 +12,8 @@ function computerPlay() {
     }
 }
 
-function playRound(playerChoice=computerPlay(), cpuChoice=computerPlay()) {
-    playerChoice = playerChoice.toLowerCase(); // make player input case-insensitive
+function playRound(playerChoice=computerPlay()) {
+    let cpuChoice = computerPlay();
     switch(playerChoice) {
         case "rock":
             if(cpuChoice == "rock") return "tie";
@@ -36,7 +36,34 @@ function playRound(playerChoice=computerPlay(), cpuChoice=computerPlay()) {
 }
 
 function game() {
+    const bodyRef = document.querySelector('body');
+
+    let outcomeDiv = document.createElement('div'); 
+    outcomeDiv.setAttribute('class', 'outcome');
+    let result = document.createElement('p');
+    outcomeDiv.appendChild(result);
+
+    bodyRef.appendChild(outcomeDiv);
     
+        // create reference to buttons for rock, paper, scissors
+        const rockBtn = document.querySelector('#rock');
+        const paperBtn = document.querySelector('#paper');
+        const scissorsBtn = document.querySelector('#scissors');
+    
+        // listen for click events to choose either rock paper or scissors
+        // then play a single round with that selection
+        rockBtn.addEventListener('click', function () {
+            result.textContent = playRound('rock');
+        });
+    
+        paperBtn.addEventListener('click', function() {
+            result.textContent = playRound('paper');
+        });
+        
+        scissorsBtn.addEventListener('click', function() {
+            result.textContent = playRound('scissors');
+        });
+
     // handle adjustment of scores for player and computer
     function adjustScore(gameOutcome) {
         switch(gameOutcome) {
@@ -58,14 +85,8 @@ function game() {
     }
 
     let playerScore = 0, cpuScore = 0;
-    for(let i = 0; i < 5; i++) {
-        let playerChoice = prompt("(Rock | Paper | Scissors): ");
+
         let cpuChoice = computerPlay();
-        let outcome = playRound(playerChoice, cpuChoice);
-        adjustScore(outcome);
-        console.log(outcome + " score is : CPU(" + cpuScore +") Player(" + playerScore + ")");
-    }
-    console.log(getWinner());
 }
 
 game()

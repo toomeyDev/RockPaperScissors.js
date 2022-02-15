@@ -1,5 +1,6 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 
+            'Lucida Sans', Arial, sans-serif;
     
     display: flex;
     justify-content: center;
@@ -11,4 +12,9 @@ body {
     padding: 5%;
     margin-top: 5%;
     box-shadow: 10px 5px 5px black;
+}
+
+.outcome {
+    padding: 25px;
+    background-color: red;
 }
