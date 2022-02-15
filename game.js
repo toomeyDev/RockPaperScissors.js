@@ -36,12 +36,17 @@ function playRound(playerChoice=computerPlay()) {
 }
 
 function game() {
-    const bodyRef = document.querySelector('body');
+    const bodyRef = document.querySelector('.game-section');
 
+    // hold outcome of each round, plus running total
     let outcomeDiv = document.createElement('div'); 
     outcomeDiv.setAttribute('class', 'outcome');
+
     let result = document.createElement('p');
+    let runningTotal = document.createElement('p');
+    runningTotal.textContent = "Current score:\n P 0 / CPU 0";
     outcomeDiv.appendChild(result);
+    outcomeDiv.appendChild(runningTotal);
 
     bodyRef.appendChild(outcomeDiv);
     
