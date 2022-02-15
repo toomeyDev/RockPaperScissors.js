@@ -14,6 +14,18 @@ body {
     box-shadow: 10px 5px 5px black;
 }
 
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+}
+
+.buttons button {
+    flex: 1;
+    min-height: 3em;
+}
+
 .outcome {
     display: flex;
     gap: 2em;

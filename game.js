@@ -1,5 +1,5 @@
 // initialize both scores to 0 at start
-let playerScore = 0, cpuScore = 0;
+let playerScore = 0, cpuScore = 0
 
 function computerPlay() {
     let cpuGuess = Math.floor(Math.random()*3);
@@ -29,6 +29,7 @@ function adjustScore(gameOutcome) {
     }
 }
 
+// handle calculation of wins/losses
 function playRound(playerChoice=computerPlay()) {
     let cpuChoice = computerPlay();
     switch(playerChoice) {
@@ -70,7 +71,9 @@ function playRound(playerChoice=computerPlay()) {
     }
 }
 
+// handle main gameplay logic
 function game() {
+    let roundCount = 0;
     const bodyRef = document.querySelector('.game-section');
 
     // hold outcome of each round, plus running total
@@ -79,11 +82,26 @@ function game() {
 
     let result = document.createElement('p');
     let runningTotal = document.createElement('p');
+    let winnerDisplay = document.createElement('p');
+    let roundsLeft = document.createElement('p');
+
+    // assign initial values for display elements
+    roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
     runningTotal.textContent = "Current score:\n P 0 / CPU 0";
+    
+    // add display elements to the game container
     outcomeDiv.appendChild(result);
     outcomeDiv.appendChild(runningTotal);
-
     bodyRef.appendChild(outcomeDiv);
+    bodyRef.appendChild(winnerDisplay);
+    bodyRef.appendChild(roundsLeft);
+
+    // handle victory calculation
+    function getWinner() {
+        if(playerScore === cpuScore) return "Game ends in a tie!";
+        if(playerScore < cpuScore) return "Computer wins the game, better luck next time!";
+        if(playerScore > cpuScore) return "Player wins the game!";
+    }
     
         // create reference to buttons for rock, paper, scissors
         const rockBtn = document.querySelector('#rock');
@@ -96,26 +114,31 @@ function game() {
             result.textContent = playRound('rock');
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
+            roundCount++; // increment # of rounds played
+            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+            console.log(roundCount);
+            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
         });
     
         paperBtn.addEventListener('click', function() {
             result.textContent = playRound('paper');
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
+            roundCount++;
+            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+            console.log(roundCount);
+            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
         });
         
         scissorsBtn.addEventListener('click', function() {
             result.textContent = playRound('scissors');
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
+            roundCount++;
+            roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
+            console.log(roundCount);
+            if(roundCount >= 5) winnerDisplay.textContent = getWinner();
         });
-
-    function getWinner() {
-        if(playerScore === cpuScore) return "Game ends in a tie!";
-        if(playerScore < cpuScore) return "Computer wins the game, better luck next time!";
-        if(playerScore > cpuScore) return "Player wins the game!";
-    }
-
 }
 
 game()
