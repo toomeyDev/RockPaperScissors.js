@@ -4,6 +4,7 @@ body {
     
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .game-section {
@@ -12,6 +13,20 @@ body {
     padding: 5%;
     margin-top: 5%;
     box-shadow: 10px 5px 5px black;
+    flex-wrap: wrap;
+    min-height: 600px;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 2px 2px 8px black;
+    letter-spacing: -0.1em;
+    width: 100%;
+    align-self: center;
+}
+
+.game-section p {
+    text-align: center;
 }
 
 .buttons {
@@ -24,11 +39,32 @@ body {
 .buttons button {
     flex: 1;
     min-height: 3em;
+    background-color: rgb(129, 74, 74);
+    border-radius: 1em;  
 }
 
 .outcome {
     display: flex;
     gap: 2em;
     justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
     padding: 25px;
+    min-width: 500px;
+    min-height: 300px;
+}
+
+.outcome p {
+    flex-basis: 100%;
+    flex: 2, 0;
+}
+
+#result {
+    align-self: center;
+    background-color: rgb(138, 138, 123);
+    padding: 0;
+    border: 2px ridge grey;
+    border-radius: 0.2em;
+    min-height: 23px;
+    
 }

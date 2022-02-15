@@ -34,53 +34,54 @@ function playRound(playerChoice=computerPlay()) {
     let cpuChoice = computerPlay();
     switch(playerChoice) {
         case "rock":
-            if(cpuChoice == "rock") return "tie";
+            if(cpuChoice == "rock") return "Tie";
             if(cpuChoice == "paper"){
                 adjustScore('lose');
-                return "lose";
+                return "Lose";
             }
             if(cpuChoice == "scissors"){
                 adjustScore('win');
-                return "win";
+                return "Win";
             }
             break;
         case "paper":
             if(cpuChoice == "rock"){
                 adjustScore('win');
-                return "win";
+                return "Win";
             }
-            if(cpuChoice == "paper") return "tie";
+            if(cpuChoice == "paper") return "Tie";
             if(cpuChoice == "scissors"){
                 adjustScore('lose');
-                return "lose";
+                return "Lose";
             }
             break;
         case "scissors":
             if(cpuChoice == "rock"){
                 adjustScore('lose');
-                return "lose";
+                return "Lose";
             }
             if(cpuChoice == "paper"){
                 adjustScore('win');
-                return "win";
+                return "Win";
             }
-            if(cpuChoice == "scissors") return "tie";
+            if(cpuChoice == "scissors") return "Tie";
             break;
         default:
-            return "error";
+            return "Error!";
     }
 }
 
 // handle main gameplay logic
 function game() {
     let roundCount = 0;
-    const bodyRef = document.querySelector('.game-section');
+    const gameSectionRef = document.querySelector('.game-section');
 
     // hold outcome of each round, plus running total
     let outcomeDiv = document.createElement('div'); 
     outcomeDiv.setAttribute('class', 'outcome');
 
     let result = document.createElement('p');
+    result.setAttribute('id', 'result')
     let runningTotal = document.createElement('p');
     let winnerDisplay = document.createElement('p');
     let roundsLeft = document.createElement('p');
@@ -92,9 +93,20 @@ function game() {
     // add display elements to the game container
     outcomeDiv.appendChild(result);
     outcomeDiv.appendChild(runningTotal);
-    bodyRef.appendChild(outcomeDiv);
-    bodyRef.appendChild(winnerDisplay);
-    bodyRef.appendChild(roundsLeft);
+    gameSectionRef.appendChild(outcomeDiv);
+    gameSectionRef.appendChild(winnerDisplay);
+    gameSectionRef.appendChild(roundsLeft);
+
+    // adjust color of result area based on outcome of each round
+    function checkResultStatus() {
+        if(result.textContent == "Win"){
+            result.style.backgroundColor = 'Green';
+        } else if(result.textContent == "Tie"){
+            result.style.backgroundColor = 'rgb(138, 138, 123)';
+        } else if(result.textContent == "Lose"){
+            result.style.backgroundColor = 'red';
+        }
+    }
 
     // handle victory calculation
     function getWinner() {
@@ -112,6 +124,7 @@ function game() {
         // then play a single round with that selection
         rockBtn.addEventListener('click', function () {
             result.textContent = playRound('rock');
+            checkResultStatus();
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
             roundCount++; // increment # of rounds played
@@ -122,6 +135,7 @@ function game() {
     
         paperBtn.addEventListener('click', function() {
             result.textContent = playRound('paper');
+            checkResultStatus();
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
             roundCount++;
@@ -132,6 +146,7 @@ function game() {
         
         scissorsBtn.addEventListener('click', function() {
             result.textContent = playRound('scissors');
+            checkResultStatus();
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
             roundCount++;
