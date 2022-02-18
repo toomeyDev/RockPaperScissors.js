@@ -38,7 +38,7 @@ function adjustGraphics(playerChoice, cpuChoice) {
     // handle player selection graphic
     switch(playerChoice) {
         case "rock":
-            playerImg.src = "/images/rock.png"
+            playerImg.src = "/images/rock.PNG"
             playerImg.style.display = "block"
             break;
         case "paper":
