@@ -1,6 +1,9 @@
 // initialize both scores to 0 at start
 let playerScore = 0, cpuScore = 0
 
+let playerImg = document.getElementById('player-selection')
+let cpuImg = document.getElementById('cpu-selection')
+
 function computerPlay() {
     let cpuGuess = Math.floor(Math.random()*3);
     switch(cpuGuess) {
@@ -29,9 +32,49 @@ function adjustScore(gameOutcome) {
     }
 }
 
+// adjust graphical components for representing player and CPU choice per-round
+function adjustGraphics(playerChoice, cpuChoice) {
+    document.getElementById('vs').style.display = "block";
+    // handle player selection graphic
+    switch(playerChoice) {
+        case "rock":
+            playerImg.src = "/images/rock.png"
+            playerImg.style.display = "block"
+            break;
+        case "paper":
+            playerImg.src = "/images/paper.png"
+            playerImg.style.display = "block"
+            break;
+        case "scissors":
+            playerImg.src = "/images/scissors.png"
+            playerImg.style.display = "block"
+            break;
+        default:
+            break;
+    }
+
+    switch(cpuChoice) {
+        case "rock":
+            cpuImg.src = "/images/rock.png"
+            cpuImg.style.display = "block"
+            break;
+        case "paper":
+            cpuImg.src = "/images/paper.png"
+            cpuImg.style.display = "block"
+            break;
+        case "scissors":
+            cpuImg.src = "/images/scissors.png"
+            cpuImg.style.display = "block"
+            break;
+        default:
+            break;
+    }
+}
+
 // handle calculation of wins/losses
 function playRound(playerChoice=computerPlay()) {
     let cpuChoice = computerPlay();
+    adjustGraphics(playerChoice, cpuChoice);
     switch(playerChoice) {
         case "rock":
             if(cpuChoice == "rock") return "Tie";
@@ -167,6 +210,11 @@ function game() {
             roundCount = 0;
             roundsLeft.textContent = `Number of rounds left: ${5 - roundCount}`;
             playerScore = 0, cpuScore = 0;
+            playerImg.style.display = "none";
+            cpuImg.style.display = "none";
+            document.getElementById('vs').style.display = "none";
+            result.style.backgroundColor = "rgb(138, 138, 123)";
+            result.textContent = "";
             runningTotal.textContent = `Current score:\n 
                 P ${playerScore} / CPU ${cpuScore}`;
             winnerDisplay.textContent = "";
