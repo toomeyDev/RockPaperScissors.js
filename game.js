@@ -55,15 +55,15 @@ function adjustGraphics(playerChoice, cpuChoice) {
 
     switch(cpuChoice) {
         case "rock":
-            cpuImg.src = "/images/rock.png"
+            cpuImg.src = "images/rock.png"
             cpuImg.style.display = "block"
             break;
         case "paper":
-            cpuImg.src = "/images/paper.png"
+            cpuImg.src = "images/paper.png"
             cpuImg.style.display = "block"
             break;
         case "scissors":
-            cpuImg.src = "/images/scissors.png"
+            cpuImg.src = "images/scissors.png"
             cpuImg.style.display = "block"
             break;
         default:
